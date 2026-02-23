@@ -1,0 +1,34 @@
+# Render Blueprint - Deploy Laravel Polibunapp Gratis
+# Dokumentasi: https://render.com/docs/blueprint-spec
+# Setelah deploy, update APP_URL & APP_KEY di Dashboard > Environment
+
+services:
+  - type: web
+    name: polibunapp
+    runtime: docker
+    region: singapore
+
+    envVars:
+      - key: APP_ENV
+        value: production
+      - key: APP_DEBUG
+        value: false
+      - key: APP_KEY
+        sync: false  # Generate: php artisan key:generate --show, lalu tambah di Dashboard
+      - key: DB_CONNECTION
+        value: pgsql
+      - key: DATABASE_URL
+        fromDatabase:
+          name: polibunapp-db
+          property: connectionString
+      - key: CACHE_DRIVER
+        value: file
+      - key: SESSION_DRIVER
+        value: file
+      - key: FILESYSTEM_DISK
+        value: local
+
+databases:
+  - name: polibunapp-db
+    plan: free
+    region: singapore
