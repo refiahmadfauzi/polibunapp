@@ -50,7 +50,9 @@ class MedicalRecordResource extends Resource
                             ->maxLength(255),
                         Forms\Components\FileUpload::make('file_path')
                             ->label('File Rekam Medis')
+                            ->disk('public')
                             ->directory('medical-records')
+                            ->visibility('public')
                             ->acceptedFileTypes(['application/pdf', 'image/*'])
                             ->maxSize(5120)
                             ->columnSpanFull(),
